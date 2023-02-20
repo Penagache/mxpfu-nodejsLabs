@@ -25,15 +25,19 @@ let users = [
 
 // GET request: Retrieve all users
 router.get("/",(req,res)=>{
-  // Copy the code here
   res.send(users);
 });
 
 // GET by specific ID request: Retrieve a single user with email ID
 router.get("/:email",(req,res)=>{
-  // Copy the code here
+  let filtered_users = users.filter((user => user.email === req.query.email));
 
-  res.send(users.filter(user => user.email === req.params.email));
+  if (filtered_users.length > 0){
+    res.send(filtered_users);
+  }
+  else{
+    res.send("Unable to find user!");
+  }
 });
 
 
